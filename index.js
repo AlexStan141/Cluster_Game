@@ -13,16 +13,6 @@ let queue = [[0,0]];
 let el;
 let res = 1;
 
-
-document.getElementsByTagName("table")[0].addEventListener('click', function(e){
-    console.log(e.target);
-    let x = parseInt(e.target.dataset.x);
-    let y = parseInt(e.target.dataset.y);
-
-    cluster(x,y,input.length);
-    console.log(res);
-});
-
 function colorCell(x, y){
     const cell = document.querySelector(`td[data-x="${x}"][data-y="${y}"]`);
     cell.style.backgroundColor = 'yellow';
@@ -104,3 +94,49 @@ function queryPosition(x, y, dim, dir){
     }
 
 }
+
+table_width = 2;
+table_height = 2;
+document.getElementsByTagName("input")[0].value = 2;
+document.getElementsByTagName("input")[1].value = 2;
+
+function modifyTable(rows, columns){
+    
+    document.querySelector("#zone table").remove();
+
+    let newTable = document.createElement("table");
+    for(let i = 1; i <= rows; i++){
+        let newRow = document.createElement("tr");
+        for(let j = 1; j <= columns; j++){
+            let newCell = document.createElement("td");
+            newRow.appendChild(newCell);
+        }
+        newTable.appendChild(newRow);
+    }
+
+    newTable.id = "zone_table";
+
+    document.querySelector("#zone").appendChild(newTable);
+}
+
+
+
+document.getElementById("width").addEventListener("change", function(evt){
+    table_width = evt.currentTarget.value;
+    modifyTable(table_height, table_width);
+});
+
+document.getElementById("height").addEventListener("change", function(evt){
+    table_height = evt.currentTarget.value;
+    modifyTable(table_height, table_width);
+});
+
+document.getElementsByTagName("table")[0].addEventListener('click', function(e){
+    console.log(e.target);
+    let x = parseInt(e.target.dataset.x);
+    let y = parseInt(e.target.dataset.y);
+
+    cluster(x,y,input.length);
+    console.log(res);
+});
+

@@ -140,3 +140,12 @@ document.getElementsByTagName("table")[0].addEventListener('click', function(e){
     console.log(res);
 });
 
+document.getElementById("dimensions").addEventListener("submit", function(e){
+    e.preventDefault();
+    let inputs = document.querySelectorAll("#dimensions input");
+    let button = document.querySelector("#dimensions button");
+    for(let input of inputs){
+        input.disabled = true;
+    }
+    button.disabled = true;
+})
